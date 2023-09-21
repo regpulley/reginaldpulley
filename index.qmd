@@ -2,10 +2,4 @@
 title: "Reginald Pulley"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+Reginald is a Phd student at the University of Maryland

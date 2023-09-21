@@ -2,7 +2,7 @@
 title: "Research"
 ---
 
-research interest
+Research Interest
 
 ```{r}
 1 + 1
