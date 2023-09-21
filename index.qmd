@@ -1,5 +1,5 @@
 ---
-title: "ReginaldPulley"
+title: "Reginald Pulley"
 ---
 
 This is a Quarto website.
