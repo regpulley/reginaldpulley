@@ -4,13 +4,20 @@
     "href": "index.html",
     "title": "Reginald Pulley",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "Reginald is a Phd student at the University of Maryland"
   },
   {
     "objectID": "Research.html",
     "href": "Research.html",
     "title": "Research",
     "section": "",
-    "text": "research interest\n\n1 + 1\n\n[1] 2"
+    "text": "Research Interest\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "CV.html",
+    "href": "CV.html",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "text"
   }
 ]
