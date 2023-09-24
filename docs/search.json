@@ -1,23 +1,23 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Reginald Pulley",
-    "section": "",
-    "text": "Reginald is a Phd student at the University of Maryland"
-  },
-  {
     "objectID": "Research.html",
     "href": "Research.html",
     "title": "Research",
     "section": "",
-    "text": "Research Interest\n\n1 + 1\n\n[1] 2"
+    "text": "Research Interest\nWorking Papers:\nPresentations:"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Reginald Pulley",
+    "section": "",
+    "text": "Hey, I’m Reginald Pulley! I am an American politics Ph.D. student at the University of Maryland, studying Race and Ethnicity Politics (REP). My research focuses on exploring the intra-group differences among Black Americans and how these differences affect their evaluations of public policy.\nBefore the University of Maryland, I began on my Ph.D. journey at Georgia State University, where I earned my Master’s in Political Science. I received my Bachelor’s degree in Political Science from Catawba College in North Carolina."
   },
   {
     "objectID": "CV.html",
     "href": "CV.html",
     "title": "Curriculum Vitae",
     "section": "",
-    "text": "text"
+    "text": "CV"
   }
 ]
