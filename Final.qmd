@@ -2,17 +2,11 @@
 title: "final"
 ---
 
-## Quarto
+## Final Project
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+What did the NAACP talk about during the Movement for Black Lives from April 2020 to June 2021
 
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-You can add options to executable code like this
-
-word cloud
+## Word Cloud
 
 ```{r}
 #| echo: false
@@ -97,7 +91,7 @@ wordcloud2(t_para)
 
 ```
 
-bar plot
+## Bar Plot
 
 ```{r}
 #| echo: false
