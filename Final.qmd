@@ -7,13 +7,9 @@ title: "final"
 What did the NAACP talk about during the Movement for Black Lives from April 2020 to June 2021
 
 ## Word Cloud
-
 ```{r}
-
-# Install and load required packages
 library(rvest)
 
-# Function to scrape titles and dates from a list of URLs
 scraper <- function(urls) {
   result_df <- data.frame()  # Initialize an empty data frame to store the results
   
@@ -57,17 +53,12 @@ urls <- c(  "https://naacp.org/media/press-statements?_page=43&keywords=&_limit=
 )
 
 result <- scraper(urls)
-print(result)
 
 library("tidytext")
+library("dplyr")
 
 result_tokens <- result %>%
   unnest_tokens(word, Title)
-
-# Print the result
-print(result_tokens)
-
-library("dplyr")
 
 result_tokens <- result_tokens %>%
   anti_join(stop_words)
@@ -81,18 +72,18 @@ result_tokens <- result_tokens %>%
 library("wordcloud2")
 library("devtools")
 
-
 t_para <- result_tokens %>%
   count(word, sort = TRUE)
 
 wordcloud2(t_para)
 
-
 ```
+
+
 
 ## Bar Plot
 
-```{r}
+```{r} 
 
 tidy_bigrams <- result %>%
   unnest_tokens(bigram, Title, token = "ngrams", n = 2) %>%
@@ -121,14 +112,9 @@ bigrams_filtered <- bigrams_separated %>%
 new_bigram_counts <- bigrams_filtered %>%
   count(word1, word2, sort = TRUE)
 
-# Display the new bigram counts
-print(new_bigram_counts)
-
 # new bigram counts:
 bigram_counts <- bigrams_filtered %>%
   count(word1, word2, sort = TRUE)
-
-print(bigram_counts)
 
 # Install and load ggplot2
 library(ggplot2)
