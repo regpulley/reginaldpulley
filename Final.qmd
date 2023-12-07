@@ -1,0 +1,153 @@
+---
+title: "final"
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+You can add options to executable code like this
+
+word cloud
+
+```{r}
+#| echo: false
+
+# Install and load required packages
+library(rvest)
+
+# Function to scrape titles and dates from a list of URLs
+scraper <- function(urls) {
+  result_df <- data.frame()  # Initialize an empty data frame to store the results
+  
+  for (url in urls) {
+    # Read the HTML content of the webpage
+    webpage <- read_html(url)
+    
+    # Extract data for the titles
+    titles <- webpage %>% html_nodes("#maincontent article div h2 a") %>% html_text()
+    
+    # Extract data for the dates
+    dates <- webpage %>% html_nodes("#maincontent article div time") %>% html_text()
+    
+    formatted_dates <- as.Date(dates, format = "%B %d, %Y")
+    
+    # Combine data into a data frame for the current URL
+    url_result <- data.frame(
+      Title = titles,
+      Date = formatted_dates,
+      stringsAsFactors = FALSE
+    )
+    
+    # Append the results for the current URL to the overall result_df
+    result_df <- rbind(result_df, url_result)
+  }
+  
+  return(result_df)
+}
+
+# Example usage
+urls <- c(  "https://naacp.org/media/press-statements?_page=43&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=42&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=41&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=40&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=39&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=38&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=37&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=36&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=35&keywords=&_limit=12",
+  "https://naacp.org/media/press-statements?_page=34&keywords=&_limit=12"
+)
+
+result <- scraper(urls)
+print(result)
+
+library("tidytext")
+
+result_tokens <- result %>%
+  unnest_tokens(word, Title)
+
+# Print the result
+print(result_tokens)
+
+library("dplyr")
+
+result_tokens <- result_tokens %>%
+  anti_join(stop_words)
+
+result_tokens %>%
+  count(word, sort = TRUE)
+
+result_tokens <- result_tokens %>%
+  filter(!word %in% c("naacp","statement","derrick","johnson","ceo", "conference", "52nd","releases"))
+
+library("wordcloud2")
+library("devtools")
+
+
+t_para <- result_tokens %>%
+  count(word, sort = TRUE)
+
+wordcloud2(t_para)
+
+
+```
+
+bar plot
+
+```{r}
+#| echo: false
+
+tidy_bigrams <- result %>%
+  unnest_tokens(bigram, Title, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram)) #NOTE here we are filtering out any words that are not a part of
+
+tidy_bigrams %>%
+  count(bigram, sort = TRUE)
+
+library(tidyr)
+
+bigrams_separated <- tidy_bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ")
+
+
+  # Define the words to be filtered out
+filter_words <- c("naacp", "statement", "derrick", "johnson", "ceo", "conference", "52nd", "releases")
+
+# Filter out specified words from bigrams
+bigrams_filtered <- bigrams_separated %>%
+  filter(!word1 %in% filter_words) %>%
+  filter(!word2 %in% filter_words) %>%
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word)
+
+# New bigram counts after filtering
+new_bigram_counts <- bigrams_filtered %>%
+  count(word1, word2, sort = TRUE)
+
+# Display the new bigram counts
+print(new_bigram_counts)
+
+# new bigram counts:
+bigram_counts <- bigrams_filtered %>%
+  count(word1, word2, sort = TRUE)
+
+print(bigram_counts)
+
+# Install and load ggplot2
+library(ggplot2)
+
+# Create a bar plot of the top N bigrams
+top_n_bigrams <- bigram_counts %>%
+  top_n(10)  # You can adjust the number as needed
+
+ggplot(top_n_bigrams, aes(x = reorder(paste(word1, word2), n), y = n)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Top Bigrams", x = "Bigram", y = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  
+  coord_flip() #flip
+```
