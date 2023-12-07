@@ -9,7 +9,6 @@ What did the NAACP talk about during the Movement for Black Lives from April 202
 ## Word Cloud
 
 ```{r}
-#| echo: false
 
 # Install and load required packages
 library(rvest)
@@ -94,7 +93,6 @@ wordcloud2(t_para)
 ## Bar Plot
 
 ```{r}
-#| echo: false
 
 tidy_bigrams <- result %>%
   unnest_tokens(bigram, Title, token = "ngrams", n = 2) %>%
