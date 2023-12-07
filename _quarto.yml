@@ -12,6 +12,8 @@ website:
         text: Research 
       - href: CV.qmd
         text: Curriculum Vitae 
+      - href: Final.qmd
+        text: GVPT 729B Final 
 
 
 format:
